@@ -89,6 +89,25 @@ void loop() {
   if(FallingRight || FallingLeft) DealWithFall();
 
   delay(100); // adjust sensor update speed
+
+  if (Serial.available()) {
+  String cmd = Serial.readStringUntil('\n');
+  cmd.trim();
+  if (cmd == "read_sensors") {
+    int distance = (int)GetDistanceCM();
+    int leftIR = digitalRead(LeftIR);
+    int rightIR = digitalRead(RightIR);
+    Serial.print(distance);
+    Serial.print(",");
+    Serial.print(leftIR);
+    Serial.print(",");
+    Serial.println(rightIR);
+  } else {
+    // handle movement commands
+    Move(cmd);
+  }
+}
+
 }
 
 // ==== Fall Detection ====
@@ -149,6 +168,7 @@ void moveMotors(int l1, int l2, int r1, int r2) {
 }
 
 void HandleLEDs(int front, int back, int right, int left) {
+  return;
   digitalWrite(FrontLEDs, front);
   digitalWrite(BackLEDs, back);
   digitalWrite(RightLEDs, right);

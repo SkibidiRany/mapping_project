@@ -1,8 +1,10 @@
 import numpy as np
-from geometry import project_point
 
-def simulated_ultrasonic(robot, distance=100):
-    """Simulate a sensor reading in front of the robot."""
-    origin = robot.position
-    direction = robot.get_direction()
-    return project_point(origin, direction, distance)
+def simulated_ultrasonic(robot_pos, robot_dir, distance=100):
+    return robot_pos + robot_dir * distance
+
+def simulated_ir(robot_pos, robot_dir):
+    x, y = robot_pos
+    left_edge = x < -500
+    right_edge = x > 500
+    return left_edge, right_edge
