@@ -1,0 +1,6 @@
+Here is how to run:
+1. navigate to needed directory:
+cd C:\Users\ranym\Desktop\GitHub FirstTest\mapping_project
+
+2. run using python full directory name:
+"C:\Users\ranym\AppData\Local\Programs\Python\Python39\python.exe" main.py
